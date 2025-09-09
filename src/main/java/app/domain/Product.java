@@ -11,11 +11,11 @@ public class Product {
     public Product() {
     }
 
-    public Product(boolean active, double price, String title, int id) {
-        this.active = active;
-        this.price = price;
-        this.title = title;
+    public Product(int id, String title, double price, boolean active) {
         this.id = id;
+        this.title = title;
+        this.price = price;
+        this.active = active;
     }
 
     public int getId() {
