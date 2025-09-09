@@ -1,0 +1,36 @@
+[ {
+  "id" : 1,
+  "title" : "Яблоко",
+  "price" : 75.0,
+  "active" : true
+}, {
+  "id" : 2,
+  "title" : "Виноград",
+  "price" : 175.0,
+  "active" : true
+}, {
+  "id" : 3,
+  "title" : "Апельсин",
+  "price" : 105.0,
+  "active" : true
+}, {
+  "id" : 4,
+  "title" : "Персик",
+  "price" : 190.0,
+  "active" : true
+}, {
+  "id" : 5,
+  "title" : "Персик",
+  "price" : 190.0,
+  "active" : true
+}, {
+  "id" : 6,
+  "title" : "Персик",
+  "price" : 190.0,
+  "active" : true
+}, {
+  "id" : 7,
+  "title" : "Персик",
+  "price" : 190.0,
+  "active" : true
+} ]
