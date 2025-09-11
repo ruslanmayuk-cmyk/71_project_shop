@@ -11,6 +11,16 @@ public class Product {
     public Product() {
     }
 
+    public Product(String title, double price) {
+        this.title = title;
+        this.price = price;
+    }
+
+    public Product(int id, double price) {
+        this.id = id;
+        this.price = price;
+    }
+
     public Product(int id, String title, double price, boolean active) {
         this.id = id;
         this.title = title;
