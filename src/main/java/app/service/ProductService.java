@@ -66,20 +66,29 @@ public class ProductService {
         if (product.getPrice() <= 0){
             throw new ProductUpdateException("Цена продукта должна быть положительна");
         }
+        product.setActive(true);
         repository.update(product);
     }
 
 //   Удалить продукт из базы данных по его идентификатору.
 //   По требованию должно происходить soft удаление - изменение статуса продукта
     public void deleteById (int id) throws IOException, ProductNotFoundException {
-        getActiveProductById(id).setActive(false);
+        Product product = getActiveProductById(id);
+        product.setActive(false);
+        repository.update(product);
     }
 
 //   Удалить продукт из базы данных по его наименованию.
-    public void deleteByTitle(String title) throws IOException {
-        getAllActiveProducts().stream()
-                .filter(x-> x.getTitle().equals(title))
-                .forEach(x-> x.setActive(false));
+    public void deleteByTitle(String title) throws IOException, ProductNotFoundException {
+        Product product = getAllActiveProducts()
+                .stream()
+                .filter(x -> x.getTitle().equals(title))
+                .peek(x -> x.setActive(false))
+                .findFirst()
+                .orElseThrow(
+                        () -> new ProductNotFoundException(title)
+                );
+        repository.update(product);
     }
 
 //   Восстановить удалённый продукт в базе данных по его идентификатору.
@@ -87,6 +96,7 @@ public class ProductService {
         Product product = repository.findById(id);
         if (product != null){
             product.setActive(true);
+            repository.update(product);
         } else {
             throw new ProductNotFoundException(id);
         }
@@ -109,6 +119,6 @@ public class ProductService {
         if (productCount == 0){
             return 0.0;
         }
-        return getActiveProductsCount()/productCount;
+        return getActiveProductsTotalCost() / productCount;
     }
 }

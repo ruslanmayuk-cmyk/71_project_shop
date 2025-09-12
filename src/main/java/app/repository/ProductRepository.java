@@ -71,20 +71,22 @@ public List<Product> findAll() throws IOException {
     public  void update (Product product) throws IOException {
         int id = product.getId();
         double newPrice = product.getPrice();
+        boolean active = product.isActive();
 
         List<Product> products = findAll();
-        products.stream()
-                .filter(x-> x.getId() == id)
-                .forEach(x -> x.setPrice(newPrice) );
+        products
+                .stream()
+                .filter(x -> x.getId() == id)
+                .forEach(
+                        x -> {
+                            x.setPrice(newPrice);
+                            x.setActive(active);
+                        }
+
+                );
 
         mapper.writeValue(database, products);
 
-    }
-// Удаление продукта
-    public void  deleteById(int id) throws IOException {
-        List<Product> products = findAll();
-        products.removeIf(x-> x.getId() == id);
-        mapper.writeValue(database, products);
 
     }
 
